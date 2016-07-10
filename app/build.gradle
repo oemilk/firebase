@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.sh.firebase.remoteconfig"
+        applicationId "com.sh.firebase"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1

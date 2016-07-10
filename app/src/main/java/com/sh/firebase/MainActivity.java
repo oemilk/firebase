@@ -1,4 +1,4 @@
-package com.sh.firebase.remoteconfig;
+package com.sh.firebase;
 
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
 					String str = mFirebaseRemoteConfig.getString(FB_REMOTE_CONFIG_STRING);
 					boolean b = mFirebaseRemoteConfig.getBoolean(FB_REMOTE_CONFIG_BOOLEAN);
-					byte [] arrBytes = mFirebaseRemoteConfig.getByteArray(FB_REMOTE_CONFIG_BYTE_ARRAY);
+//					byte [] arrBytes = mFirebaseRemoteConfig.getByteArray(FB_REMOTE_CONFIG_BYTE_ARRAY);
 					double d = mFirebaseRemoteConfig.getDouble(FB_REMOTE_CONFIG_DOUBLE);
 					long l = mFirebaseRemoteConfig.getLong(FB_REMOTE_CONFIG_LONG);
 					int color = Color.parseColor(mFirebaseRemoteConfig.getString(FB_REMOTE_CONFIG_COLOR));
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 					StringBuilder builder = new StringBuilder();
 					builder.append("String : ").append(str).append("\n");
 					builder.append("boolean : ").append(b).append("\n");
-					builder.append("byte : ").append(arrBytes[0]).append("\n");
+//					builder.append("byte : ").append(arrBytes[0]).append("\n");
 					builder.append("double : ").append(d).append("\n");
 					builder.append("long : ").append(l).append("\n");
 					builder.append("color : ").append(color).append("\n");
