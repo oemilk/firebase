@@ -4,8 +4,7 @@ firebase
 
 This is a project for sample about android firebase remote config.
 
-![alt tag](https://github.com/oemilk/images/blob/master/firebase_remote_config_screenshot_01.png)
-![alt tag](https://github.com/oemilk/images/blob/master/firebase_remote_config_screenshot_02.png)
+![alt tag](https://github.com/oemilk/images/blob/master/firebase_screenshot_01.png)
 
 ## Add Firebase
 
@@ -103,5 +102,5 @@ Please send an email to "oemilk@naver.com".
 [google-services.json]: https://support.google.com/firebase/answer/
 [build.gradle]: https://github.com/oemilk/firebase/blob/master/build.gradle
 [app/build.gradle]: https://github.com/oemilk/firebase/blob/master/app/build.gradle
-[remote config codes]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/remoteconfig/MainActivity.java#L49-L64
-[fetch codes]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/remoteconfig/MainActivity.java#L66-L101
+[remote config codes]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/RemoteConfigFragment.java#L64-L77
+[fetch codes]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/RemoteConfigFragment.java#L80-L115
