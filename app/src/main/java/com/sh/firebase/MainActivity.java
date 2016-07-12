@@ -1,36 +1,21 @@
 package com.sh.firebase;
 
-import android.graphics.Color;
-import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
-
-import java.util.HashMap;
-import java.util.Map;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
 	private final String TAG = "MainActivity";
 
-	private final long CACHE_EXPIRATION = 0;
-	private final String FB_REMOTE_CONFIG_STRING = "remote_config_string";
-	private final String FB_REMOTE_CONFIG_BOOLEAN = "remote_config_boolean";
-	private final String FB_REMOTE_CONFIG_BYTE_ARRAY = "remote_config_byte_array";
-	private final String FB_REMOTE_CONFIG_DOUBLE = "remote_config_double";
-	private final String FB_REMOTE_CONFIG_LONG = "remote_config_long";
-	private final String FB_REMOTE_CONFIG_COLOR = "remote_config_color";
-
-	private FirebaseRemoteConfig mFirebaseRemoteConfig;
-
-	private TextView mTextView;
+	private Fragment mAnalyticsFragment;
+	private Fragment mRemoteConfigFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,66 +23,55 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 
 		initLayout();
-		initFBRemoteConfig();
-		fetch();
 	}
 
 	private void initLayout() {
-		mTextView = (TextView) findViewById(R.id.textView);
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+
+		DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
+				this, drawerLayout, toolbar, android.R.string.ok, android.R.string.no);
+		drawerLayout.setDrawerListener(actionBarDrawerToggle);
+		actionBarDrawerToggle.syncState();
+
+		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+		navigationView.setNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+		mAnalyticsFragment = AnalyticsFragment.newInstance();
+		mRemoteConfigFragment = RemoteConfigFragment.newInstance();
+		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, mAnalyticsFragment).commit();
 	}
 
-	private void initFBRemoteConfig() {
-		mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
-		FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
-				.setDeveloperModeEnabled(true)
-				.build();
-		mFirebaseRemoteConfig.setConfigSettings(configSettings);
-
-		Map<String, Object> map = new HashMap<>();
-		map.put(FB_REMOTE_CONFIG_STRING, "default");
-		map.put(FB_REMOTE_CONFIG_BOOLEAN, false);
-		map.put(FB_REMOTE_CONFIG_BYTE_ARRAY, new byte[0]);
-		map.put(FB_REMOTE_CONFIG_DOUBLE, 0.0);
-		map.put(FB_REMOTE_CONFIG_LONG, 555);
-		map.put(FB_REMOTE_CONFIG_COLOR, "#000000");
-		mFirebaseRemoteConfig.setDefaults(map);
+	@Override
+	public void onBackPressed() {
+		DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+			drawerLayout.closeDrawer(GravityCompat.START);
+		} else {
+			super.onBackPressed();
+		}
 	}
 
-	private void fetch() {
-		mFirebaseRemoteConfig.fetch(CACHE_EXPIRATION).addOnCompleteListener(new OnCompleteListener<Void>() {
-			@Override
-			public void onComplete(@NonNull Task<Void> task) {
-				if (task.isSuccessful()) {
-					Log.d(TAG, "onComplete Succeeded");
-					mFirebaseRemoteConfig.activateFetched();
+	private NavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
+			new NavigationView.OnNavigationItemSelectedListener() {
+				@Override
+				public boolean onNavigationItemSelected(MenuItem item) {
+					int id = item.getItemId();
+					switch (id) {
+						case R.id.nav_analytics:
+							getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, mAnalyticsFragment).commit();
+							break;
+						case R.id.nav_remote_config:
+							getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, mRemoteConfigFragment).commit();
+							break;
+					}
 
-					String str = mFirebaseRemoteConfig.getString(FB_REMOTE_CONFIG_STRING);
-					boolean b = mFirebaseRemoteConfig.getBoolean(FB_REMOTE_CONFIG_BOOLEAN);
-//					byte [] arrBytes = mFirebaseRemoteConfig.getByteArray(FB_REMOTE_CONFIG_BYTE_ARRAY);
-					double d = mFirebaseRemoteConfig.getDouble(FB_REMOTE_CONFIG_DOUBLE);
-					long l = mFirebaseRemoteConfig.getLong(FB_REMOTE_CONFIG_LONG);
-					int color = Color.parseColor(mFirebaseRemoteConfig.getString(FB_REMOTE_CONFIG_COLOR));
-
-					StringBuilder builder = new StringBuilder();
-					builder.append("String : ").append(str).append("\n");
-					builder.append("boolean : ").append(b).append("\n");
-//					builder.append("byte : ").append(arrBytes[0]).append("\n");
-					builder.append("double : ").append(d).append("\n");
-					builder.append("long : ").append(l).append("\n");
-					builder.append("color : ").append(color).append("\n");
-
-					mTextView.setText(builder);
-					mTextView.setBackgroundColor(color);
-				} else {
-					Log.d(TAG, "onComplete failed");
+					DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+					drawer.closeDrawer(GravityCompat.START);
+					return true;
 				}
-			}
-		}).addOnFailureListener(new OnFailureListener() {
-			@Override
-			public void onFailure(@NonNull Exception e) {
-				Log.d(TAG, "onFailure : " + e.getMessage());
-			}
-		});
-	}
+			};
+
 
 }
