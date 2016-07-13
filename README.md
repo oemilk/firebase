@@ -29,13 +29,43 @@ apply plugin: 'com.android.application'
 dependencies {
     // ...
     compile 'com.google.firebase:firebase-core:9.2.0'
-    compile 'com.google.firebase:firebase-config:9.2.0'
+    compile 'com.google.firebase:firebase-config:9.2.0' // for remote config
 }
 
 apply plugin: 'com.google.gms.google-services'
 ```
 
-## Add Remote Config
+## Initial Analytics
+
+- Create the singleton Analytics object. [[analytics codes]]
+
+```Analytics_Object
+mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+```
+
+#### Log Events
+
+```Log_evnets
+Bundle bundle = new Bundle();
+bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "test id");
+bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "test name");
+bundle.putString(FirebaseAnalytics.Param.ITEM_LOCATION_ID, "test location id");
+mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LEVEL_UP, bundle);
+
+Bundle bundle = new Bundle();
+bundle.putString("custom_id", "custom test id");
+bundle.putString("custom_name", "custom test name");
+bundle.putString("custom_location_id", "custom test location id");
+mFirebaseAnalytics.logEvent("custom_event", bundle);
+```
+
+#### Set User Properties
+
+```Set_user_properties
+mFirebaseAnalytics.setUserProperty("test_user_property", "test user");
+```
+
+## Initial Remote Config
 
 - Create the singleton Remote Config object. [[remote config codes]]
 
@@ -66,7 +96,7 @@ Map<String, Object> map = new HashMap<>();
   mFirebaseRemoteConfig.setDefaults(map);
 ```
 
-## Fetch
+#### Fetch
 
 - Fetch and activate values from the server [[fetch codes]]
 
@@ -104,3 +134,6 @@ Please send an email to "oemilk@naver.com".
 [app/build.gradle]: https://github.com/oemilk/firebase/blob/master/app/build.gradle
 [remote config codes]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/RemoteConfigFragment.java#L64-L77
 [fetch codes]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/RemoteConfigFragment.java#L80-L115
+[analytics codes]: https://github.com/oemilk/firebase/blob/0c0b2ca4283a9867ffdefb0a62c99d39569391be/app/src/main/java/com/sh/firebase/AnalyticsFragment.java#L46-L48
+[log events]: https://github.com/oemilk/firebase/blob/0c0b2ca4283a9867ffdefb0a62c99d39569391be/app/src/main/java/com/sh/firebase/AnalyticsFragment.java#L54-L68
+[set user properties]: https://github.com/oemilk/firebase/blob/0c0b2ca4283a9867ffdefb0a62c99d39569391be/app/src/main/java/com/sh/firebase/AnalyticsFragment.java#L50-L52
