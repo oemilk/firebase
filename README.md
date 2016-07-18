@@ -127,7 +127,7 @@ mFirebaseRemoteConfig.fetch(CACHE_EXPIRATION).addOnCompleteListener(new OnComple
 			}
 ```
 
-## Initial Remote database
+## Initial Realtime database
 
 - Create the singleton Database object. [[database codes]]
 - Create reference the location you want to write to.
