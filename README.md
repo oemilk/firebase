@@ -28,8 +28,9 @@ apply plugin: 'com.android.application'
 
 dependencies {
     // ...
-    compile 'com.google.firebase:firebase-core:9.2.0'
-    compile 'com.google.firebase:firebase-config:9.2.0' // for remote config
+    compile 'com.google.firebase:firebase-core:9.2.1'
+    compile 'com.google.firebase:firebase-config:9.2.1' // for remote config
+    compile 'com.google.firebase:firebase-database:9.2.1' // for remote database
 }
 
 apply plugin: 'com.google.gms.google-services'
@@ -126,6 +127,42 @@ mFirebaseRemoteConfig.fetch(CACHE_EXPIRATION).addOnCompleteListener(new OnComple
 			}
 ```
 
+## Initial Remote database
+
+- Create the singleton Database object. [[database codes]]
+- Create reference the location you want to write to.
+
+```Database_Object
+private final String REFERENCE_NAME = "first_reference";
+
+...
+
+mFirebaseDatabase = FirebaseDatabase.getInstance();
+mDatabaseReference = mFirebaseDatabase.getReference(REFERENCE_NAME);
+```
+
+#### Write to your database
+
+```Write
+mDatabaseReference.setValue("Test 1");
+```
+
+#### Read from your database
+
+```Read
+mDatabaseReference.addValueEventListener(new ValueEventListener() {
+			@Override
+			public void onDataChange(DataSnapshot dataSnapshot) {
+				String value = dataSnapshot.getValue(String.class);
+			}
+
+			@Override
+			public void onCancelled(DatabaseError error) {
+				// error
+			}
+		});
+```
+
 If you have any questions about this project.
 Please send an email to "oemilk@naver.com".
 
@@ -137,3 +174,4 @@ Please send an email to "oemilk@naver.com".
 [analytics codes]: https://github.com/oemilk/firebase/blob/0c0b2ca4283a9867ffdefb0a62c99d39569391be/app/src/main/java/com/sh/firebase/AnalyticsFragment.java#L46-L48
 [log events]: https://github.com/oemilk/firebase/blob/0c0b2ca4283a9867ffdefb0a62c99d39569391be/app/src/main/java/com/sh/firebase/AnalyticsFragment.java#L54-L68
 [set user properties]: https://github.com/oemilk/firebase/blob/0c0b2ca4283a9867ffdefb0a62c99d39569391be/app/src/main/java/com/sh/firebase/AnalyticsFragment.java#L50-L52
+[database codes]: https://github.com/oemilk/firebase/blob/656340563ac64f52c1998e783d78160d18f67ff7/app/src/main/java/com/sh/firebase/RealtimeDatabaseFragment.java#L53-L56
