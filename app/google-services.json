@@ -8,14 +8,14 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:928488830433:android:4d973ce8611ae520",
+        "mobilesdk_app_id": "1:928488830433:android:34324b1c396f00c9",
         "android_client_info": {
           "package_name": "com.sh.firebase"
         }
       },
       "oauth_client": [
         {
-          "client_id": "928488830433-bmj87m78ameql5qnr15anqvhr7r4gl1b.apps.googleusercontent.com",
+          "client_id": "928488830433-770rd4fk9nsmrv5fedqd4vurliu4q6bb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.sh.firebase",

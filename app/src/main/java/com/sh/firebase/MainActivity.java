@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
 	private Fragment mAnalyticsFragment;
 	private Fragment mRemoteConfigFragment;
+	private Fragment mRealtimeDatabaseFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
 		mAnalyticsFragment = AnalyticsFragment.newInstance();
 		mRemoteConfigFragment = RemoteConfigFragment.newInstance();
+		mRealtimeDatabaseFragment = RealtimeDatabaseFragment.newInstance();
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, mAnalyticsFragment).commit();
 	}
 
@@ -64,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
 							break;
 						case R.id.nav_remote_config:
 							getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, mRemoteConfigFragment).commit();
+							break;
+						case R.id.nav_realtime_database:
+							getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, mRealtimeDatabaseFragment).commit();
 							break;
 					}
 

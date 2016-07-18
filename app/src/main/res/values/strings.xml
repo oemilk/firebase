@@ -2,5 +2,6 @@
     <string name="app_name">Firebase</string>
     <string name="analytics">Analytics</string>
     <string name="remote_config">Remote Config</string>
+    <string name="realtime_database">Realtime Database</string>
     <string name="github_url">https://github.com/oemilk/firebase</string>
 </resources>

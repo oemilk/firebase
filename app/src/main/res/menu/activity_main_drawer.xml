@@ -10,6 +10,10 @@
             android:id="@+id/nav_remote_config"
             android:icon="@drawable/ic_remote_config"
             android:title="@string/remote_config"/>
+        <item
+            android:id="@+id/nav_realtime_database"
+            android:icon="@drawable/ic_realtime_database"
+            android:title="@string/realtime_database"/>
     </group>
 
 </menu>
