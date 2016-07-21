@@ -48,9 +48,8 @@ mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
 
 ```Log_evnets
 Bundle bundle = new Bundle();
-bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "test id");
-bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "test name");
-bundle.putString(FirebaseAnalytics.Param.ITEM_LOCATION_ID, "test location id");
+bundle.putString(FirebaseAnalytics.Param.CHARACTER, "test character");
+bundle.putLong(FirebaseAnalytics.Param.LEVEL, 10);
 mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LEVEL_UP, bundle);
 
 Bundle bundle = new Bundle();
