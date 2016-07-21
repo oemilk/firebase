@@ -64,8 +64,8 @@ public class RealtimeDatabaseFragment extends Fragment {
 	}
 
 	private void writeByJavaObject() {
-		RealtimeDatabaseDataClass testClass = new RealtimeDatabaseDataClass("test code", "test title", "test text");
-		mDatabaseReferenceForJavaObject.setValue(testClass);
+		RealtimeDatabaseData data = new RealtimeDatabaseData("test code", "test title", "test text");
+		mDatabaseReferenceForJavaObject.setValue(data);
 	}
 
 	private void read() {
@@ -84,8 +84,8 @@ public class RealtimeDatabaseFragment extends Fragment {
 		mDatabaseReferenceForJavaObject.addValueEventListener(new ValueEventListener() {
 			@Override
 			public void onDataChange(DataSnapshot dataSnapshot) {
-				RealtimeDatabaseDataClass testClass = dataSnapshot.getValue(RealtimeDatabaseDataClass.class);
-				String text = testClass.code + testClass.title + testClass.text;
+				RealtimeDatabaseData data = dataSnapshot.getValue(RealtimeDatabaseData.class);
+				String text = data.code + data.title + data.text;
 				mTextView.setText(text);
 			}
 
