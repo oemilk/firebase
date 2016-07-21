@@ -32,7 +32,8 @@ public class AnalyticsFragment extends Fragment {
 
 		initFBAnalytics();
 		setUserProperties();
-		logEvents();
+		levelUpLogEvents();
+		generateLeadLogEvents();
 		logCustomEvents();
 	}
 
@@ -51,12 +52,18 @@ public class AnalyticsFragment extends Fragment {
 		mFirebaseAnalytics.setUserProperty("test_user_property", "test user");
 	}
 
-	private void logEvents() {
+	private void levelUpLogEvents() {
 		Bundle bundle = new Bundle();
-		bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "test id");
-		bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "test name");
-		bundle.putString(FirebaseAnalytics.Param.ITEM_LOCATION_ID, "test location id");
+		bundle.putString(FirebaseAnalytics.Param.CHARACTER, "test character");
+		bundle.putLong(FirebaseAnalytics.Param.LEVEL, 10);
 		mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LEVEL_UP, bundle);
+	}
+
+	private void generateLeadLogEvents() {
+		Bundle bundle = new Bundle();
+		bundle.putString(FirebaseAnalytics.Param.VALUE, "test value");
+		bundle.putString(FirebaseAnalytics.Param.CURRENCY, "USD");
+		mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.GENERATE_LEAD, bundle);
 	}
 
 	private void logCustomEvents() {
