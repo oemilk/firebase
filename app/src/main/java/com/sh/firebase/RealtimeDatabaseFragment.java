@@ -18,9 +18,11 @@ public class RealtimeDatabaseFragment extends Fragment {
 	private final String TAG = "RealtimeDatabaseFragment";
 
 	private final String REFERENCE_NAME = "first_reference";
+	private final String REFERENCE_NAME_FOR_JAVA_OBJECT = "java_object_reference";
 
 	private FirebaseDatabase mFirebaseDatabase;
 	private DatabaseReference mDatabaseReference;
+	private DatabaseReference mDatabaseReferenceForJavaObject;
 
 	private TextView mTextView;
 
@@ -39,6 +41,7 @@ public class RealtimeDatabaseFragment extends Fragment {
 
 		initFBRealtimeDatabase();
 		write();
+		writeByJavaObject();
 		read();
 	}
 
@@ -53,10 +56,16 @@ public class RealtimeDatabaseFragment extends Fragment {
 	private void initFBRealtimeDatabase() {
 		mFirebaseDatabase = FirebaseDatabase.getInstance();
 		mDatabaseReference = mFirebaseDatabase.getReference(REFERENCE_NAME);
+		mDatabaseReferenceForJavaObject = mFirebaseDatabase.getReference(REFERENCE_NAME_FOR_JAVA_OBJECT);
 	}
 
 	private void write() {
 		mDatabaseReference.setValue("Test 1");
+	}
+
+	private void writeByJavaObject() {
+		RealtimeDatabaseDataClass testClass = new RealtimeDatabaseDataClass("test code", "test title", "test text");
+		mDatabaseReferenceForJavaObject.setValue(testClass);
 	}
 
 	private void read() {
@@ -65,6 +74,19 @@ public class RealtimeDatabaseFragment extends Fragment {
 			public void onDataChange(DataSnapshot dataSnapshot) {
 				String value = dataSnapshot.getValue(String.class);
 				mTextView.setText(value);
+			}
+
+			@Override
+			public void onCancelled(DatabaseError error) {
+				mTextView.setText(error.getMessage());
+			}
+		});
+		mDatabaseReferenceForJavaObject.addValueEventListener(new ValueEventListener() {
+			@Override
+			public void onDataChange(DataSnapshot dataSnapshot) {
+				RealtimeDatabaseDataClass testClass = dataSnapshot.getValue(RealtimeDatabaseDataClass.class);
+				String text = testClass.code + testClass.title + testClass.text;
+				mTextView.setText(text);
 			}
 
 			@Override
