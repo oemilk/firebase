@@ -14,6 +14,10 @@
             android:id="@+id/nav_realtime_database"
             android:icon="@drawable/ic_realtime_database"
             android:title="@string/realtime_database"/>
+        <item
+            android:id="@+id/nav_storage"
+            android:icon="@drawable/ic_storage"
+            android:title="@string/storage"/>
     </group>
 
 </menu>
