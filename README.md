@@ -31,6 +31,8 @@ dependencies {
     compile 'com.google.firebase:firebase-core:9.2.1'
     compile 'com.google.firebase:firebase-config:9.2.1' // for remote config
     compile 'com.google.firebase:firebase-database:9.2.1' // for remote database
+    compile 'com.google.firebase:firebase-storage:9.2.1' // for storage
+    compile 'com.google.firebase:firebase-auth:9.2.1' // for storage, auth
 }
 
 apply plugin: 'com.google.gms.google-services'
@@ -162,6 +164,123 @@ mDatabaseReference.addValueEventListener(new ValueEventListener() {
 		});
 ```
 
+## Initial Storage
+
+- Create the singleton Storage object. [[storage codes]]
+- Create a storage reference.
+
+```Storage_Object
+private final String REFERENCE_URL = "gs://fir-test-b6db6.appspot.com";
+
+mFirebaseStorage = FirebaseStorage.getInstance();
+mStorageReference = mFirebaseStorage.getReferenceFromUrl(REFERENCE_URL);
+```
+
+#### Upload Files
+
+- To upload a file to Firebase Storage, you first create a reference to the full path of the file, including the file name.  [[upload files]] 
+- Call the putBytes(), putFile(), or putStream() method to upload the file to Firebase Storage.
+
+```Upload_files
+mUploadStorageReference = mStorageReference.child(UPLOAD_FILE_NAME);
+
+mImageView.setDrawingCacheEnabled(true);
+mImageView.buildDrawingCache();
+Bitmap bitmap = mImageView.getDrawingCache();
+ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+byte[] data = byteArrayOutputStream.toByteArray();
+
+UploadTask uploadTask = mUploadStorageReference.putBytes(data);
+uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+	@Override
+	public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+		// success
+	}
+}).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+	@Override
+	public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+		double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+		// progress
+	}
+}).addOnPausedListener(new OnPausedListener<UploadTask.TaskSnapshot>() {
+	@Override
+	public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
+		// pause
+	}
+}).addOnFailureListener(new OnFailureListener() {
+	@Override
+	public void onFailure(@NonNull Exception e) {
+		// fail
+	}
+});
+```
+
+#### Download Files
+
+- To download a file, first create a Firebase Storage reference to the file you want to download. [[download files]]
+- Download files from Firebase Storage by calling the getBytes() or getStream(). 
+
+```Download_files
+mDownloadStorageReference = mStorageReference.child(DOWNLOAD_FILE_NAME);
+
+final long ONE_MEGABYTE = 1024 * 1024;
+mDownloadStorageReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+	@Override
+	public void onSuccess(byte[] bytes) {
+		// success
+	}
+}).addOnFailureListener(new OnFailureListener() {
+	@Override
+	public void onFailure(@NonNull Exception e) {
+		// fail
+	}
+});
+```
+
+#### Use File Metadata
+
+```Use_file_metadata
+mUploadStorageReference = mStorageReference.child(UPLOAD_FILE_NAME);
+
+Uri file = Uri.fromFile(new File(FILE_PATH));
+
+// Add File Metadata
+StorageMetadata storageMetadata = new StorageMetadata.Builder()
+	.setContentType("image/jpg").build();
+
+UploadTask uploadTask = mUploadStorageReference.putFile(file, storageMetadata);
+uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+	@Override
+	public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+		// success
+	}
+}).addOnFailureListener(new OnFailureListener() {
+	@Override
+	public void onFailure(@NonNull Exception e) {
+		// fail
+	}
+});
+```
+
+#### Delete Files
+
+```delete_files
+mUploadStorageReference = mStorageReference.child(UPLOAD_FILE_NAME);
+
+mUploadStorageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+	@Override
+	public void onSuccess(Void aVoid) {
+		// success
+	}
+}).addOnFailureListener(new OnFailureListener() {
+	@Override
+	public void onFailure(@NonNull Exception e) {
+		// fail
+	}
+});
+```
+
 If you have any questions about this project.
 Please send an email to "oemilk@naver.com".
 
@@ -174,3 +293,6 @@ Please send an email to "oemilk@naver.com".
 [log events]: https://github.com/oemilk/firebase/blob/0c0b2ca4283a9867ffdefb0a62c99d39569391be/app/src/main/java/com/sh/firebase/AnalyticsFragment.java#L54-L68
 [set user properties]: https://github.com/oemilk/firebase/blob/0c0b2ca4283a9867ffdefb0a62c99d39569391be/app/src/main/java/com/sh/firebase/AnalyticsFragment.java#L50-L52
 [database codes]: https://github.com/oemilk/firebase/blob/656340563ac64f52c1998e783d78160d18f67ff7/app/src/main/java/com/sh/firebase/RealtimeDatabaseFragment.java#L53-L56
+[storage codes]:https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/StorageDownloadFragment.java#L107-L109
+[upload files]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/StorageUploadFragment.java#L126-L198
+[download files]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/StorageDownloadFragment.java#L112-L145
