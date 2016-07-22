@@ -10,7 +10,7 @@ public class RealtimeDatabaseData {
 	public String text;
 
 	public RealtimeDatabaseData() {
-		// Default constructor required for calls to DataSnapshot.getValue(TestClass.class)
+		// Default constructor required for calls to DataSnapshot.getValue(RealtimeDatabaseData.class)
 	}
 
 	public RealtimeDatabaseData(String code, String title, String text) {

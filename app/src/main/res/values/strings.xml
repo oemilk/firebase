@@ -3,6 +3,7 @@
     <string name="analytics">Analytics</string>
     <string name="remote_config">Remote Config</string>
     <string name="realtime_database">Realtime Database</string>
-    <string name="storage">Storage</string>
+    <string name="storage_download">Storage Download</string>
+    <string name="storage_upload">Storage Upload</string>
     <string name="github_url">https://github.com/oemilk/firebase</string>
 </resources>

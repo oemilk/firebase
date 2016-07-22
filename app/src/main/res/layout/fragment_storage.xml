@@ -2,11 +2,12 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.sh.firebase.StorageFragment">
+             tools:context=".StorageDownloadFragment">
 
     <ImageView
         android:id="@+id/storage_imageview"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_storage"/>
 
 </FrameLayout>
