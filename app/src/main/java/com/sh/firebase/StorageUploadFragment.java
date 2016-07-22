@@ -12,9 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FileDownloadTask;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnPausedListener;
 import com.google.firebase.storage.OnProgressListener;
@@ -37,6 +38,7 @@ public class StorageUploadFragment extends Fragment {
 	private final String REFERENCE_URL = "gs://fir-test-b6db6.appspot.com";
 	private final String SAVE_INSTANCE_KEY = "reference";
 	private final String UPLOAD_FILE_NAME = "upload.jpg";
+	private final String FILE_PATH = "image/default.jpg";
 
 	private FirebaseStorage mFirebaseStorage;
 	private StorageReference mStorageReference;
@@ -72,6 +74,8 @@ public class StorageUploadFragment extends Fragment {
 				uploadDataInMemory();
 //				uploadStream();
 //				uploadLocalFile();
+//				deleteStorageFile();
+//				updateFileMetadata();
 			}
 		});
 		return v;
@@ -154,7 +158,7 @@ public class StorageUploadFragment extends Fragment {
 
 	private void uploadStream() {
 		try {
-			InputStream inputStream = new FileInputStream(new File("image/default.jpg"));
+			InputStream inputStream = new FileInputStream(new File(FILE_PATH));
 			UploadTask uploadTask = mUploadStorageReference.putStream(inputStream);
 			uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
 				@Override
@@ -173,7 +177,7 @@ public class StorageUploadFragment extends Fragment {
 	}
 
 	private void uploadLocalFile() {
-		Uri file = Uri.fromFile(new File("image/default.jpg"));
+		Uri file = Uri.fromFile(new File(FILE_PATH));
 
 		// Add File Metadata
 		StorageMetadata storageMetadata = new StorageMetadata.Builder()
@@ -184,6 +188,40 @@ public class StorageUploadFragment extends Fragment {
 			@Override
 			public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 				Log.d(TAG, "uploadLocalFile : " + taskSnapshot.getTotalByteCount());
+			}
+		}).addOnFailureListener(new OnFailureListener() {
+			@Override
+			public void onFailure(@NonNull Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
+
+	private void updateFileMetadata() {
+		StorageMetadata storageMetadata = new StorageMetadata.Builder()
+				.setContentType("image/jpg")
+				.setCustomMetadata("custom meta key", "custom meta value")
+				.build();
+
+		mUploadStorageReference.updateMetadata(storageMetadata)
+				.addOnCompleteListener(new OnCompleteListener<StorageMetadata>() {
+					@Override
+					public void onComplete(@NonNull Task<StorageMetadata> task) {
+						Log.d(TAG, "updateFileMetadata complete");
+					}
+				}).addOnFailureListener(new OnFailureListener() {
+			@Override
+			public void onFailure(@NonNull Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
+
+	private void deleteStorageFile() {
+		mUploadStorageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+			@Override
+			public void onSuccess(Void aVoid) {
+				Log.d(TAG, "deleteStorageFile success");
 			}
 		}).addOnFailureListener(new OnFailureListener() {
 			@Override
