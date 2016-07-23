@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 	private Fragment mRealtimeDatabaseFragment;
 	private Fragment mStorgeDownloadFragment;
 	private Fragment mStorgeUploadFragment;
+	private Fragment mCrashReportingFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 		mRealtimeDatabaseFragment = RealtimeDatabaseFragment.newInstance();
 		mStorgeDownloadFragment = StorageDownloadFragment.newInstance();
 		mStorgeUploadFragment = StorageUploadFragment.newInstance();
+		mCrashReportingFragment = CrashReportingFragment.newInstance();
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, mAnalyticsFragment).commit();
 	}
 
@@ -79,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
 							break;
 						case R.id.nav_storage_upload:
 							getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, mStorgeUploadFragment).commit();
+							break;
+						case R.id.nav_crash_reporting:
+							getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, mCrashReportingFragment).commit();
 							break;
 					}
 

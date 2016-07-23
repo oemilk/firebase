@@ -22,6 +22,10 @@
             android:id="@+id/nav_storage_upload"
             android:icon="@drawable/ic_storage"
             android:title="@string/storage_upload"/>
+        <item
+            android:id="@+id/nav_crash_reporting"
+            android:icon="@drawable/ic_crash_reporting"
+            android:title="@string/crash_reporting"/>
     </group>
 
 </menu>
