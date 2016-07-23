@@ -30,9 +30,10 @@ dependencies {
     // ...
     compile 'com.google.firebase:firebase-core:9.2.1'
     compile 'com.google.firebase:firebase-config:9.2.1' // for remote config
-    compile 'com.google.firebase:firebase-database:9.2.1' // for remote database
+    compile 'com.google.firebase:firebase-database:9.2.1' // for realtime database
     compile 'com.google.firebase:firebase-storage:9.2.1' // for storage
     compile 'com.google.firebase:firebase-auth:9.2.1' // for storage, auth
+    compile 'com.google.firebase:firebase-crash:9.2.1' // for crash reporting
 }
 
 apply plugin: 'com.google.gms.google-services'
@@ -281,6 +282,19 @@ mUploadStorageReference.delete().addOnSuccessListener(new OnSuccessListener<Void
 });
 ```
 
+## Initial Crash Reporting
+
+- Create your first error [[crash reporting]]
+- Create custom logs
+
+```crash_reporting
+FirebaseCrash.report(new Exception("My first Android non-fatal error"));
+
+// custom error
+FirebaseCrash.log("Activity created");
+FirebaseCrash.logcat(Log.ERROR, TAG, "Logcat error");
+```
+
 If you have any questions about this project.
 Please send an email to "oemilk@naver.com".
 
@@ -296,3 +310,4 @@ Please send an email to "oemilk@naver.com".
 [storage codes]:https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/StorageDownloadFragment.java#L107-L109
 [upload files]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/StorageUploadFragment.java#L126-L198
 [download files]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/StorageDownloadFragment.java#L112-L145
+[crash reporting]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/CrashReportingFragment.java#L44-L48
