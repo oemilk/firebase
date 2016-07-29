@@ -26,6 +26,10 @@
             android:id="@+id/nav_crash_reporting"
             android:icon="@drawable/ic_crash_reporting"
             android:title="@string/crash_reporting"/>
+        <item
+            android:id="@+id/nav_authentication"
+            android:icon="@drawable/ic_authentication"
+            android:title="@string/authentication"/>
     </group>
 
 </menu>
