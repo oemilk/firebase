@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		FacebookSdk.sdkInitialize(getApplicationContext());
+		FacebookSdk.sdkInitialize(getApplicationContext()); // for facebook log in
 		setContentView(R.layout.activity_main);
 
 		initLayout();
