@@ -65,6 +65,25 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/facebook_login_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Facebook login" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/facebook_login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+        <TextView
             android:id="@+id/auth_state_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

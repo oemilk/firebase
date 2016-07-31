@@ -8,4 +8,6 @@
     <string name="crash_reporting">Crash Reporting</string>
     <string name="authentication">Authentication</string>
     <string name="github_url">https://github.com/oemilk/firebase</string>
+
+    <string name="facebook_app_id">1717039708570582</string>
 </resources>

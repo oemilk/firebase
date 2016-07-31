@@ -33,6 +33,7 @@ dependencies {
     compile 'com.android.support:support-v4:24.0.0'
 
     compile 'com.google.android.gms:play-services-auth:9.2.1'
+    compile 'com.facebook.android:facebook-android-sdk:4.+'
 }
 
 
