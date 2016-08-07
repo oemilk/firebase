@@ -1,4 +1,4 @@
-package com.sh.firebase.crash_reporing;
+package com.sh.firebase.crash_reporting;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

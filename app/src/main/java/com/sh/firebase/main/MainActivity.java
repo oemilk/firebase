@@ -14,7 +14,7 @@ import com.facebook.FacebookSdk;
 import com.sh.firebase.R;
 import com.sh.firebase.analytics.AnalyticsFragment;
 import com.sh.firebase.authentication.AuthenticationFragment;
-import com.sh.firebase.crash_reporing.CrashReportingFragment;
+import com.sh.firebase.crash_reporting.CrashReportingFragment;
 import com.sh.firebase.realtime_database.RealtimeDatabaseFragment;
 import com.sh.firebase.remote_config.RemoteConfigFragment;
 import com.sh.firebase.storage.StorageDownloadFragment;
