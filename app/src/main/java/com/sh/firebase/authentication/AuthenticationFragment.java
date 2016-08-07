@@ -32,6 +32,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GithubAuthProvider;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.TwitterAuthProvider;
 import com.sh.firebase.R;
@@ -61,6 +62,9 @@ public class AuthenticationFragment extends Fragment {
     private final String TWITTER_CONSUMER_SECRET = "Wjne0Ct1WLipHGdn1q2tX529xG3tEyss1RVFjl7dD9HY6e7z1m";
     private final int TWITTER_LOG_IN_REQUEST_CODE = 140;
 
+    // for gibhub log in
+    private final String GITHUB_TOKEN = "4dfd90fb0ac9ef75c4aabcc87ee0cdd4062a921c";
+
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -71,10 +75,45 @@ public class AuthenticationFragment extends Fragment {
     private TextView mGoogleSignInTextView;
     private TextView mFaceBookLogInTextView;
     private TextView mTwitterLogInTextView;
+    private TextView mGithubLogInTextView;
     private TextView mAuthStateTextview;
 
     private LoginButton mFacebookLoginButton;
     private TwitterLoginButton mTwitterLoginButton;
+    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            int id = view.getId();
+            switch (id) {
+                case R.id.pw_sign_up_button:
+                    createUserWithEmailAndPassword();
+                    break;
+                case R.id.pw_sign_in_button:
+                    signInWithEmailAndPassword();
+                    break;
+                case R.id.pw_sign_out_button:
+                    signOut();
+                    break;
+                case R.id.google_sign_in_button:
+                    signInWithGoogleSignIn();
+                    break;
+                case R.id.google_sign_out_button:
+                    signOut();
+                    break;
+                case R.id.facebook_logout_button:
+                    logOutWithFacebook();
+                    break;
+                case R.id.twitter_logout_button:
+                    logOutWithTwitter();
+                case R.id.github_login_button:
+                    initFBGithubLogIn();
+                    break;
+                case R.id.github_logout_button:
+                    signOut();
+                    break;
+            }
+        }
+    };
 
     public AuthenticationFragment() {
         // Required empty public constructor
@@ -104,6 +143,7 @@ public class AuthenticationFragment extends Fragment {
         mAuthStateTextview = (TextView) v.findViewById(R.id.auth_state_textview);
         mFaceBookLogInTextView = (TextView) v.findViewById(R.id.facebook_login_textview);
         mTwitterLogInTextView = (TextView) v.findViewById(R.id.twitter_login_textview);
+        mGithubLogInTextView = (TextView) v.findViewById(R.id.github_login_textview);
 
         Button pwSignUpButton = (Button) v.findViewById(R.id.pw_sign_up_button);
         Button pwSignInButton = (Button) v.findViewById(R.id.pw_sign_in_button);
@@ -112,6 +152,8 @@ public class AuthenticationFragment extends Fragment {
         Button googlesignOutButton = (Button) v.findViewById(R.id.google_sign_out_button);
         Button facebookLogOutButton = (Button) v.findViewById(R.id.facebook_logout_button);
         Button twitterLogOutButton = (Button) v.findViewById(R.id.twitter_logout_button);
+        Button githubLogInButton = (Button) v.findViewById(R.id.github_login_button);
+        Button githubLogOutButton = (Button) v.findViewById(R.id.github_logout_button);
 
         mFacebookLoginButton = (LoginButton) v.findViewById(R.id.facebook_login_button);
         mTwitterLoginButton = (TwitterLoginButton) v.findViewById(R.id.twitter_login_button);
@@ -125,6 +167,8 @@ public class AuthenticationFragment extends Fragment {
         googlesignOutButton.setOnClickListener(mOnClickListener);
         facebookLogOutButton.setOnClickListener(mOnClickListener);
         twitterLogOutButton.setOnClickListener(mOnClickListener);
+        githubLogInButton.setOnClickListener(mOnClickListener);
+        githubLogOutButton.setOnClickListener(mOnClickListener);
         return v;
     }
 
@@ -159,36 +203,6 @@ public class AuthenticationFragment extends Fragment {
             mTwitterLoginButton.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            int id = view.getId();
-            switch (id) {
-                case R.id.pw_sign_up_button:
-                    createUserWithEmailAndPassword();
-                    break;
-                case R.id.pw_sign_in_button:
-                    signInWithEmailAndPassword();
-                    break;
-                case R.id.pw_sign_out_button:
-                    signOut();
-                    break;
-                case R.id.google_sign_in_button:
-                    signInWithGoogleSignIn();
-                    break;
-                case R.id.google_sign_out_button:
-                    signOut();
-                    break;
-                case R.id.facebook_logout_button:
-                    logOutWithFacebook();
-                    break;
-                case R.id.twitter_logout_button:
-                    logOutWithTwitter();
-                    break;
-            }
-        }
-    };
 
     private void initFBAuthentication() {
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -395,9 +409,9 @@ public class AuthenticationFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         String message;
                         if (task.isSuccessful()) {
-                            message = "success firebaseAuthWithGoogle";
+                            message = "success firebaseAuthWithTwitter";
                         } else {
-                            message = "fail firebaseAuthWithGoogle";
+                            message = "fail firebaseAuthWithTwitter";
                         }
                         mTwitterLogInTextView.setText(message);
                     }
@@ -418,5 +432,30 @@ public class AuthenticationFragment extends Fragment {
         }
     }
     // [END auth_with_twitter]
+
+    // [START auth_with_github]
+    private void initFBGithubLogIn() {
+        AuthCredential credential = GithubAuthProvider.getCredential(GITHUB_TOKEN);
+        mFirebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(AuthenticationFragment.this.getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        String message;
+                        if (task.isSuccessful()) {
+                            message = "success firebaseAuthWithGithub";
+                        } else {
+                            message = "fail firebaseAuthWithGithub";
+                        }
+                        mGithubLogInTextView.setText(message);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                mGithubLogInTextView.setText(e.getMessage());
+                e.printStackTrace();
+            }
+        });
+    }
+    // [END auth_with_github]
 
 }

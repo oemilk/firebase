@@ -114,6 +114,30 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/github_login_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Github login" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/github_login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="log in" />
+
+            <Button
+                android:id="@+id/github_logout_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="log out" />
+        </LinearLayout>
+
+        <TextView
             android:id="@+id/auth_state_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
