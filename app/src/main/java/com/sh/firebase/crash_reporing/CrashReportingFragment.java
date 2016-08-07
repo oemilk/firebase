@@ -1,4 +1,4 @@
-package com.sh.firebase;
+package com.sh.firebase.crash_reporing;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.firebase.crash.FirebaseCrash;
+import com.sh.firebase.R;
 
 public class CrashReportingFragment extends Fragment {
 

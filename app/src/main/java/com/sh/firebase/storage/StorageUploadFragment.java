@@ -1,4 +1,4 @@
-package com.sh.firebase;
+package com.sh.firebase.storage;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -22,6 +22,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.sh.firebase.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

@@ -1,4 +1,4 @@
-package com.sh.firebase;
+package com.sh.firebase.realtime_database;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 

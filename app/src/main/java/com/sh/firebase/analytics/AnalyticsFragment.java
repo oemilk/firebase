@@ -1,4 +1,4 @@
-package com.sh.firebase;
+package com.sh.firebase.analytics;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.sh.firebase.R;
 
 public class AnalyticsFragment extends Fragment {
 

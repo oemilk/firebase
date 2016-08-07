@@ -1,4 +1,4 @@
-package com.sh.firebase;
+package com.sh.firebase.authentication;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,8 +32,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-
-import java.util.concurrent.Executor;
+import com.sh.firebase.R;
 
 public class AuthenticationFragment extends Fragment {
 

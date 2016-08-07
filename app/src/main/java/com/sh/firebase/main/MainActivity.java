@@ -1,4 +1,4 @@
-package com.sh.firebase;
+package com.sh.firebase.main;
 
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,6 +11,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.facebook.FacebookSdk;
+import com.sh.firebase.R;
+import com.sh.firebase.analytics.AnalyticsFragment;
+import com.sh.firebase.authentication.AuthenticationFragment;
+import com.sh.firebase.crash_reporing.CrashReportingFragment;
+import com.sh.firebase.realtime_database.RealtimeDatabaseFragment;
+import com.sh.firebase.remote_config.RemoteConfigFragment;
+import com.sh.firebase.storage.StorageDownloadFragment;
+import com.sh.firebase.storage.StorageUploadFragment;
 
 public class MainActivity extends AppCompatActivity {
 

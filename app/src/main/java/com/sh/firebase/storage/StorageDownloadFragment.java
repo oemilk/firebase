@@ -1,4 +1,4 @@
-package com.sh.firebase;
+package com.sh.firebase.storage;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,9 +18,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+import com.sh.firebase.R;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;

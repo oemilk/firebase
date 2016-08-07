@@ -1,4 +1,4 @@
-package com.sh.firebase;
+package com.sh.firebase.remote_config;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+import com.sh.firebase.R;
 
 import java.util.HashMap;
 import java.util.Map;
