@@ -28,12 +28,12 @@ apply plugin: 'com.android.application'
 
 dependencies {
     // ...
-    compile 'com.google.firebase:firebase-core:9.2.1'
-    compile 'com.google.firebase:firebase-config:9.2.1' // for remote config
-    compile 'com.google.firebase:firebase-database:9.2.1' // for realtime database
-    compile 'com.google.firebase:firebase-storage:9.2.1' // for storage
-    compile 'com.google.firebase:firebase-auth:9.2.1' // for storage, auth
-    compile 'com.google.firebase:firebase-crash:9.2.1' // for crash reporting
+    compile 'com.google.firebase:firebase-core:9.4.0'
+    compile 'com.google.firebase:firebase-config:9.4.0' // for remote config
+    compile 'com.google.firebase:firebase-database:9.4.0' // for realtime database
+    compile 'com.google.firebase:firebase-storage:9.4.0' // for storage
+    compile 'com.google.firebase:firebase-auth:9.4.0' // for storage, auth
+    compile 'com.google.firebase:firebase-crash:9.4.0' // for crash reporting
 }
 
 apply plugin: 'com.google.gms.google-services'
@@ -295,6 +295,10 @@ FirebaseCrash.log("Activity created");
 FirebaseCrash.logcat(Log.ERROR, TAG, "Logcat error");
 ```
 
+## Authentication
+
+- [Authentication]
+
 If you have any questions about this project.
 Please send an email to "oemilk@naver.com".
 
@@ -311,3 +315,4 @@ Please send an email to "oemilk@naver.com".
 [upload files]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/storage/StorageUploadFragment.java#L127-L199
 [download files]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/storage/StorageDownloadFragment.java#L111-L144
 [crash reporting]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/crash_reporting/CrashReportingFragment.java#L44-L50
+[Authentication]: https://github.com/oemilk/firebase/blob/master/app/src/main/java/com/sh/firebase/authentication/README.md
