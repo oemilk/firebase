@@ -81,6 +81,36 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal" />
 
+            <Button
+                android:id="@+id/facebook_logout_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="log out" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/twitter_login_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Twitter login" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.twitter.sdk.android.core.identity.TwitterLoginButton
+                android:id="@+id/twitter_login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerInParent="true"/>
+
+            <Button
+                android:id="@+id/twitter_logout_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="log out" />
         </LinearLayout>
 
         <TextView

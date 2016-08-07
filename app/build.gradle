@@ -33,7 +33,13 @@ dependencies {
 
     compile 'com.google.android.gms:play-services-auth:9.4.0'
     compile 'com.facebook.android:facebook-android-sdk:4.+'
-}
 
+    compile('com.twitter.sdk.android:twitter-core:1.7.0@aar') {
+        transitive = true;
+    }
+    compile('com.twitter.sdk.android:twitter:1.7.0@aar') {
+        transitive = true;
+    }
+}
 
 apply plugin: 'com.google.gms.google-services'
