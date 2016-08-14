@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import com.facebook.FacebookSdk;
 import com.sh.firebase.R;
 import com.sh.firebase.analytics.AnalyticsFragment;
+import com.sh.firebase.authentication.AuthenticationForAnonymousFragment;
 import com.sh.firebase.authentication.AuthenticationFragment;
 import com.sh.firebase.crash_reporting.CrashReportingFragment;
 import com.sh.firebase.realtime_database.RealtimeDatabaseFragment;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 	private Fragment mStorgeUploadFragment;
 	private Fragment mCrashReportingFragment;
 	private Fragment mAuthenticationFragment;
+	private Fragment mAuthenticationForAnonymousFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 		mStorgeUploadFragment = StorageUploadFragment.newInstance();
 		mCrashReportingFragment = CrashReportingFragment.newInstance();
 		mAuthenticationFragment = AuthenticationFragment.newInstance();
+		mAuthenticationForAnonymousFragment = AuthenticationForAnonymousFragment.newInstance();
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, mAnalyticsFragment).commit();
 	}
 
@@ -101,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
 							break;
 						case R.id.nav_authentication:
 							getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, mAuthenticationFragment).commit();
+							break;
+						case R.id.authentication_for_anonymous:
+							getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, mAuthenticationForAnonymousFragment).commit();
 							break;
 					}
 

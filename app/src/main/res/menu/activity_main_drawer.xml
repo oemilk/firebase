@@ -30,6 +30,10 @@
             android:id="@+id/nav_authentication"
             android:icon="@drawable/ic_authentication"
             android:title="@string/authentication"/>
+        <item
+            android:id="@+id/authentication_for_anonymous"
+            android:icon="@drawable/ic_authentication"
+            android:title="@string/authentication_for_anonymous"/>
     </group>
 
 </menu>
