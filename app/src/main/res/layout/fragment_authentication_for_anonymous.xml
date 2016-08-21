@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.sh.firebase.authentication.AuthenticationForAnonymousFragmen">
+    tools:context="com.sh.firebase.authentication.AuthenticationForAnonymousFragment">
 
     <TextView
         android:id="@+id/anonymous_authenticaion_textview"
@@ -27,6 +27,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="convert" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/link_multiple_auth_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Link Multiple Auth Providers to an Account" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/signin_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sign in" />
+
+        <Button
+            android:id="@+id/link_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="link" />
+
+        <Button
+            android:id="@+id/unlink_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="unlink" />
     </LinearLayout>
 
     <TextView
